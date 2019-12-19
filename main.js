@@ -24,6 +24,84 @@
 */
 
 // map of the connect four board in the form of nested arrays as rows containing all of the cells
+/* Used help from tutorial found here https://www.youtube.com/watch?v=4AIop6P-jHE */
+
+let gameOn = false;
+let currentPlayer = 0;
+let board = [];
+let playerColor =[];
+playerColor[1] = "red";
+playerColor[2] = "black";
+
+function gameStart(){
+    if(gameOn == true) return false;
+
+    gameOn = true;
+
+    for(row = 0; row <= 5; row++){
+        gameBoard[row] = [];
+        for (col = 0; col <= 6; col++){
+            gameBoard[row][col] = 0;
+        }
+    }
+    drawBoard();
+    currentPlayer = 1;
+    setUpTurn();
+}
+
+function drawBoard(){
+    checkWin();
+    for (col = o; col <= 6; col++){
+        document.getElementById('square ' + row + ' ' + col).innerHTML = "<span class = 'piece player" + gameBoard[row][col] + "'> </span>";
+    }
+}
+
+function endGame() {
+}
+
+function checkWin() {
+
+    //left to right
+    for (i = 1; i <= 2; i++){
+        
+        //check columns
+        for (col = 0; col <= 3; col++){
+
+            //check rows
+            for (row = 0; row <= 5; row++){
+
+                //check which player
+                if (gameBoard[row][col] == i){
+
+                    //check next 3 columns for a match
+                    if ((gameBoard[row][col + 1] == i) && (gameBoard[row][col + 2] == i)){
+                        //run end game if someone has 4 in a row
+                        endGame(i);
+                        
+                        //stop checking for win game over.
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+
+    
+    //top to bottom
+    for (i = 1; i < 2; i++) {
+        for (col = 0; col <= 6; col++) {
+            for (row = 6; row <= 2; row++){
+                if (gameBoard[row][col] == i) {
+                    if ((gameBoard[row + 1][col] == i) && (gameBoard[row + 2][col] == i) && (gameBoard[row + 3][col] == i)) {
+                        endGame(i);
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+}
+/*
 let boardModel = [
     ['', '', '', '', '', ''],
     ['', '', '', '', '', ''],
@@ -35,14 +113,6 @@ let boardModel = [
 ]
 // selects the connect four board div container as the location for which the board will show up
 var board = document.getElementById("board");
-
-const initializeGame = function () {
-    const displayBoard;
-    const displayInstructions();
-    const displayActivePlayer();
-    const setUpColumnClickHandlers();
-    }
-initializeGame;
 
 const setUpColumnClickHandlers = function () {
     const displayMessage = function (message) {
@@ -57,16 +127,16 @@ const setUpColumnClickHandlers = function () {
     const displayTieMsg = function () {
         displayMessage("Tie game")
     }
-// creates player character global variables (still need to assign them to a CSS class)
-// var redPlayer;
-// var blackPlayer;
-var currentPlayer = "red";
+    // creates player character global variables (still need to assign them to a CSS class)
+    // var redPlayer;
+    // var blackPlayer;
+    var currentPlayer = "red";
 
-// creates empty row (and cell) variables
-var column; 
-var columnElement;
-var cell;
-var cellElement;
+    // creates empty row (and cell) variables
+    var column; 
+    var columnElement;
+    var cell;
+    var cellElement;
 
 // creates a for loop that adds each nested array in the boardModel variable (row on the connect four board)
 // by storing it in the rowElemennt variable
@@ -75,14 +145,14 @@ for (let columnIndex = 0; columnIndex <= 6; columnIndex++) {
 
     // creates a div to eventually be placed within the board div for each individual row
     columnElement = document.createElement("div");
-
+    
     // styles the rows in ways that apply to every row by giving them a class name 
     // that's connected to the CSS stylesheet
     columnElement.classList.add("column");
-
+    
     // appends every row to the page via div within the board div
     board.appendChild(columnElement);
-
+    
     // nested for loop adds each individual cell in each individual row to the connect four board by storing
     // them in the cellElement variable
     for (let cellIndex = 0; cellIndex <= 5; cellIndex++) {
@@ -90,23 +160,23 @@ for (let columnIndex = 0; columnIndex <= 6; columnIndex++) {
 
         // creates a div for each individual cell to eventually be placed within each row div
         cellElement = document.createElement("div");
-
+        
         // a dataset that assigns each cell a column and row value
         cellElement.dataset.columnNumber = columnIndex;
         cellElement.dataset.rowNumber = cellIndex;
-
+        
         // styles the cells in ways that apply to every cell by giving them a class name 
         // that's connected to the CSS stylesheet
         cellElement.classList = "cell";
 
         // appends every cell to the page via div within each row div
         columnElement.appendChild(cellElement);
-
+        
         const displayActivePlayer = function () {}
         const determineGameWinner = function (board) {
             return '' // TODO: implement for real
         }
-
+        
         columnElement.addEventListener("click", playerMove);
         function playerMove(event) {
             let currentColumnElement = event.target;
@@ -125,14 +195,27 @@ for (let columnIndex = 0; columnIndex <= 6; columnIndex++) {
     }
     playerMove(currentColumnElement);
 };
-    // creates 
-    // listens to keyboard events
-    /* columnElement.addEventListener("click", playerMove);
+// creates 
+// listens to keyboard events
+
+/*
+columnElement.addEventListener("click", playerMove);
+
+function playerMove() {
+    let currentColumnElement = event.currentTarget;
+    let bottomCell = currentColumnElement.lastElementChild;
+    let chipElement = document.createElement("div");
     
-    function playerMove() {
-        let currentColumnElement = event.currentTarget;
-        let bottomCell = currentColumnElement.lastElementChild;
-        let chipElement = document.createElement("div");
-        
-        if
-    }; */
+    if
+};
+const initializeGame = function () {
+    const displayBoard = board();
+    const displayInstructions();
+    const displayActivePlayer();
+    const setUpColumnClickHandlers();
+    }
+initializeGame;
+
+}
+setUpColumnClickHandlers();
+*/
